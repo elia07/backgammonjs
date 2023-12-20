@@ -8,8 +8,3 @@ This repository is extended of https://github.com/quasoft/backgammonjs
 -Time based turns
 -Adding Api for user management
 
-## Screenshot
-will Add soon 
-
-## Screenshot
-will add soon but it worth ro run it once by your self

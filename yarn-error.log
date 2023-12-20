@@ -1,0 +1,62 @@
+Arguments: 
+  C:\Program Files\nodejs\node.exe C:\Users\FF\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js install
+
+PATH: 
+  C:\Users\FF\Desktop\Stage\backgammon\env/Scripts;C:\Program Files\Microsoft\jdk-11.0.16.101-hotspot\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Users\FF\AppData\Local\Programs\Python\Python311;C:\Users\FF\AppData\Local\Programs\Python\Python311\Scripts;C:\Program Files\Docker\Docker\resources\bin;C:\Program Files\dotnet\;C:\Program Files\Git\cmd;C:\Program Files (x86)\Microsoft SQL Server\160\DTS\Binn\;C:\Program Files\Azure Data Studio\bin;C:\Program Files\nodejs\;C:\ProgramData\chocolatey\bin;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;C:\Program Files\Microsoft SQL Server\150\Tools\Binn\;C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit\;C:\Program Files (x86)\Bitvise SSH Client;C:\Users\FF\AppData\Local\Microsoft\WindowsApps;C:\Users\FF\AppData\Local\Programs\Python\Python311;C:\Users\FF\AppData\Local\Programs\Microsoft VS Code\bin;C:\Program Files\Azure Data Studio\bin;C:\Users\FF\AppData\Roaming\npm;C:\Users\FF\.dotnet\tools;D:\flutter_windows_3.13.6-stable\flutter\bin;
+
+Yarn version: 
+  1.22.19
+
+Node version: 
+  18.17.1
+
+Platform: 
+  win32 x64
+
+Trace: 
+  Error: getaddrinfo ENOTFOUND registry.yarnpkg.com
+      at GetAddrInfoReqWrap.onlookup [as oncomplete] (node:dns:108:26)
+
+npm manifest: 
+  {
+    "name": "backgammon.js",
+    "version": "0.0.1",
+    "author": "quasoft <info@quasoft.net>",
+    "description": "Backgammon.js Game",
+    "license": "MIT",
+    "scripts": {
+      "build:browser": "cd app && npm run build && cd ..",
+      "build": "npm run build:browser",
+      "start:server": "node ./app/server.js",
+      "start": "npm run build:browser && npm run start:server",
+      "install": "cd app && npm install -dd && cd ..",
+      "postinstall": "npm run install && npm run build",
+      "lint": "jshint ."
+    },
+    "devDependencies": {
+      "gulp": "^4.0.0",
+      "jshint": "^2.9.4"
+    },
+    "dependencies": {
+      "compression": "^1.7.3",
+      "cookie-parser": "^1.4.3",
+      "cookies": "^0.7.1",
+      "crypto-js": "^3.1.9-1",
+      "csurf": "^1.9.0",
+      "errorhandler": "^1.5.0",
+      "express-handlebars": "^3.0.0",
+      "gulp": "^4.0.0",
+      "locks": "^0.2.2",
+      "method-override": "^3.0.0",
+      "mongodb": "^3.1.1",
+      "morgan": "^1.9.0",
+      "nodemailer": "^4.6.8",
+      "svg-captcha": "^1.3.11"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

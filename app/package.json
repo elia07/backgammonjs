@@ -1,0 +1,44 @@
+{
+  "name": "parsvegas-backgammon",
+  "version": "0.0.1",
+  "author": "q",
+  "description": "",
+  "license": "MIT",
+  "main": "server.js",
+  "dependencies": {
+    "@mdi/font": "^3.0.39",
+    "bootstrap-v4-rtl": "^4.1.1-0",
+    "bower": "^1.7.9",
+    "browserify": "^13.0.1",
+    "client-sessions": "^0.8.0",
+    "clipboard": "^1.5.10",
+    "express": "^4.10.2",
+    "gulp": "^4.0.0",
+    "jquery": "^3.3.1",
+    "js-cookie": "^2.1.2",
+    "mongodb": "^2.2.30",
+    "popper.js": "^1.14.5",
+    "socket.io": "^1.4.5",
+    "socket.io-client": "^1.4.5",
+    "sweetalert2": "^8.8.1"
+  },
+  "devDependencies": {
+    "gulp": "^4.0.0",
+    "gulp-nodemon": "^2.4.2",
+    "watch": "^0.17.1",
+    "watchify": "^3.7.0"
+  },
+  "scripts": {
+    "build:js": "browserify ./public/js/main.js --require socket.io-client -o ./public/js/bundle.js",
+    "build": "npm run build:js",
+    "watch:js": "watchify ./public/js/main.js --require socket.io-client -o ./public/js/bundle.js -v",
+    "watch": "npm run watch:js",
+    "postinstall": "HOME=$OPENSHIFT_REPO_DIR bower install || bower install"
+  },
+  "browser": {
+    "jquery-fittext": "./bower_components/fittext/fittext.js"
+  },
+  "browserify": {
+    "transform": []
+  }
+}

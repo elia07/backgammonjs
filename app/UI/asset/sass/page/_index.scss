@@ -1,0 +1,240 @@
+/* ====================================>>
+    Index Page
+    1. Home
+    2. Auth Modal
+    3. Massage Modal
+   ====================================>> */
+
+/* ===== 1. Home ===== */
+.body-home {
+  background-image: url("../../images/bg-home.jpg");
+  background-size: cover;
+  background-position: center center;
+  height: 100%;
+}
+.bg-home {
+  position: relative;
+  background-color: $primary-color-black;
+  .home {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    @media (max-width: 850px) {
+      padding: 4px;
+    }
+    @media (max-width: 400px) {
+      flex-direction: column;
+    }
+    @media (min-width: 851px) {
+      padding: 10px 0;
+    }
+    .right {
+      display: inline-flex;
+      @media (max-width: 400px) {
+        margin-top: 5px;
+        margin-bottom: 5px;
+      }
+      p {
+        cursor: pointer;
+        @include user-select(none);
+        color: #FFF;
+        margin-bottom: 0;
+        padding-left: 10px;
+        &:nth-child(1) {
+          margin-left: 10px;
+          border-left: 1px solid #515151;
+        }
+        i {
+          line-height: 20px;
+          margin-left: 10px;
+          font-size: $font-normal + 8;
+        }
+      }
+    }
+    .left {
+      display: inline-flex;
+      .social {
+        display: block;
+        ul {
+          display: flex;
+          align-items: center;
+          justify-content: end;
+          margin: 0;
+          padding: 0;
+          li {
+            display: inline-flex;
+            margin: 0;
+            padding: 0;
+            a {
+              padding: 4px;
+              color: #fff;
+              font-size: $font-normal + 1;
+              font-weight: bold;
+              i {
+                line-height: 20px;
+                font-size: $font-normal + 6;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/* ===== 2. Auth Modal ===== */
+.auth-modal {
+  .modal-dialog {
+    @media (min-width: 576px) {
+      max-width: 400px;
+    }
+    .modal-content {
+      @include border(2px solid $primary-color-black);
+      overflow: hidden;
+      background-color: #1e1e1e;
+      .modal-header {
+        background-color: #1e1e1e;
+        padding: 10px;
+        border-bottom-color: #000;
+        @include border-radius(0);
+        background: rgba(30, 30, 30, 1);
+        background: -moz-linear-gradient(top, rgba(30, 30, 30, 1) 0%, rgba(30, 30, 30, 1) 26%, rgba(20, 20, 21, 1) 80%, rgba(20, 20, 21, 1) 100%);
+        background: -webkit-linear-gradient(top, rgba(30, 30, 30, 1) 0%, rgba(30, 30, 30, 1) 26%, rgba(20, 20, 21, 1) 80%, rgba(20, 20, 21, 1) 100%);
+        background: -o-linear-gradient(top, rgba(30, 30, 30, 1) 0%, rgba(30, 30, 30, 1) 26%, rgba(20, 20, 21, 1) 80%, rgba(20, 20, 21, 1) 100%);
+        background: -ms-linear-gradient(top, rgba(30, 30, 30, 1) 0%, rgba(30, 30, 30, 1) 26%, rgba(20, 20, 21, 1) 80%, rgba(20, 20, 21, 1) 100%);
+        background: linear-gradient(to bottom, rgba(30, 30, 30, 1) 0%, rgba(30, 30, 30, 1) 26%, rgba(20, 20, 21, 1) 80%, rgba(20, 20, 21, 1) 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#1e1e1e', endColorstr='#141415', GradientType=0);
+        h5 {
+          display: block;
+          width: 100%;
+          text-align: center;
+          margin: 0 auto;
+          font-size: $font-normal + 1;
+          font-weight: 500;
+          color: #FFF;
+        }
+        button {
+          position: absolute;
+          left: 15px;
+          top: 16px;
+          line-height: 16px;
+        }
+      }
+      .modal-body {
+        background-color: #1e1e1e;
+        .form-group {
+          position: relative;
+          input {
+            font-size: $font-normal + 2px;
+            background-color: #1e1e1e;
+            color: #666666;
+            border-color: #494949;
+            &::placeholder {
+              font-size: $font-normal;
+              color: #494949;
+            }
+          }
+          i {
+            color: #494949;
+            position: absolute;
+            left: 8px;
+            top: -2px;
+            font-size: 25px;
+          }
+          small{
+            position: absolute;
+            left: 0;
+            top: 5px;
+            color: #494949;
+          }
+          .custom-control {
+            label {
+              color: #494949;
+              line-height: 24px;
+              font-size: $font-normal - 2;
+              a {
+                color: #585858;
+              }
+            }
+          }
+          .custom-checkbox .custom-control-input:checked ~ .custom-control-label::before {
+            background-color: $primary-color-light;
+          }
+        }
+        .btn-auth {
+          background-color: $primary-color-light;
+          font-size: $font-normal + 1;
+          font-weight: 500;
+          color: #FFF;
+        }
+      }
+    }
+  }
+}
+
+/* ===== 3. Massage Modal ===== */
+.massage-modal {
+  .modal-dialog {
+    .modal-content {
+      padding: 8px;
+      @include box-shadow(0 0 12px rgba(0, 0, 0, 0.85));
+      overflow: hidden;
+      background-image: url("../../images/bg-modal.jpg");
+      background-repeat: repeat;
+      .modal-header {
+        background-color: #f9f9f9;
+        padding: 10px;
+        border-bottom-color: #e2e2e2;
+        border-top: 1px solid #b19501;
+        border-right: 1px solid #b19501;
+        border-left: 1px solid #b19501;
+        @include border-radius(0);
+        h5 {
+          font-size: $font-normal;
+          font-weight: 500;
+          i{
+            font-size: 25px;
+            line-height: 22px;
+          }
+        }
+        button {
+          position: absolute;
+          left: 32px;
+          top: 33px;
+          line-height: 16px;
+          background-color: #f64848;
+          padding: 4px 4px 0px;
+          opacity: 1;
+          @include border-radius(4px);
+          @include border(1px solid #ed1e1e);
+          span{
+            color: #FFF;
+          }
+        }
+      }
+      .modal-body {
+        background-color: #FFF;
+        border-bottom: 1px solid #9c840d;
+        border-right: 1px solid #9c840d;
+        border-left: 1px solid #9c840d;
+        min-height: 100px;
+        p{
+          color: $primary-color-black;
+          line-height: normal;
+          font-size: $font-normal - 1;
+          font-weight: 500;
+        }
+        .action{
+          display: flex;
+          justify-content: end;
+          .btn{
+            padding: 0.25rem 0.75rem;
+            font-size: $font-normal - 2;
+            font-weight: normal;
+          }
+        }
+      }
+    }
+  }
+}

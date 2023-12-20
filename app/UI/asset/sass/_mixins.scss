@@ -1,0 +1,81 @@
+@mixin border ($border){
+  -webkit-border: $border;
+  -moz-border: $border;
+  -ms-border: $border;
+  border: $border;
+}
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  -ms-border-radius: $radius;
+  border-radius: $radius;
+}
+@mixin box-shadow($box-shadow) {
+  -webkit-box-shadow: $box-shadow;
+  -moz-box-shadow: $box-shadow;
+  box-shadow: $box-shadow;
+}
+@mixin border-shadows($border-shadows) {
+  -webkit-border-shadows: $border-shadows;
+  -moz-border-shadows: $border-shadows;
+  border-shadows: $border-shadows;
+}
+@mixin transform($transform) {
+  -webkit-transform: $transform;
+  -ms-transform: $transform;
+  transform: $transform;
+}
+@mixin background-image($url , $repeat : no-repeat , $position : auto auto, $size : cover){
+  background-image: url($url);
+  background-repeat: $repeat;
+  background-position: $position;
+  background-size: $size;
+}
+@mixin background-image-inline($repeat : no-repeat , $position : center, $size : cover){
+  background-repeat: $repeat;
+  background-position: $position;
+  background-size: $size;
+}
+@mixin transition ($transition){
+  -webkit-transition: $transition;
+  -moz-transition: $transition;
+  -O-transition: $transition;
+  transition: $transition;
+}
+@mixin animation ($animation){
+  -webkit-animation: $animation;
+  -moz-animation: $animation;
+  -O-animation: $animation;
+  animation: $animation;
+}
+@mixin filter ($filter){
+  -webkit-filter: $filter;
+  filter: $filter;
+}
+@mixin perspective ($perspective){
+  -webkit-perspective: $perspective;
+  perspective: $perspective;
+}
+@mixin transform-style ($transform-style){
+  -webkit-transform-style: $transform-style;
+  transform-style: $transform-style;
+}
+@mixin backface-visibility ($backface-visibility){
+  -webkit-backface-visibility: $backface-visibility;
+  backface-visibility: $backface-visibility;
+}
+@mixin user-select ($user-select){
+  -webkit-user-select: $user-select;
+  -moz-user-select: $user-select;
+  -ms-user-select: $user-select;
+  user-select: $user-select;
+}
+@mixin transition-timing-function ($transition-timing-function){
+  transition-timing-function: $transition-timing-function;
+  -webkit-transition-timing-function: $transition-timing-function;
+  -o-transition-timing-function: $transition-timing-function;
+}
+@mixin grayscale ($grayscale){
+  -webkit-filter: $grayscale;
+  filter: $grayscale;
+}

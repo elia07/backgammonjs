@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="fa_IR" dir="rtl">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" type="image/x-icon" href="images/favicon.png">
+    <title>شیش و بش</title>
+
+    <!-- All CSS -->
+    <link rel="stylesheet" href="../public/css/bootstrap.css">
+    <link rel="stylesheet" href="../public/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="../public/css/sweetalert2.min.css">
+    <link rel="stylesheet" href="../public/css/style.css">
+    <link rel="stylesheet" href="../public/css/backgammon.css">
+
+
+  <script type="text/x-mustache" id="tmpl-board">
+    <div id="frame-top" class="frame"></div>
+    <div class="board cf" style="border:solid 20px #38200a;">
+      <div id="pane-left" class="pane">
+        <div id="field0" class="field row0 col0"></div>
+        <div id="field1" class="field row1 col0"></div>
+        <div class="dice-panel left" style="display: none;height:0px;">
+          <div id="dice-left" class="dice left"></div>
+        </div>
+      </div>
+      <div id="bar" class="bar">
+        <table width="100%" height="100%">
+        <tr height="50%">
+          <td valign="top" id="top-bar"></td>
+        </tr>
+        <tr height="50%">
+          <td valign="bottom" id="bottom-bar"></td>
+        </tr>
+        </table>
+      </div>
+      <div id="pane-right" class="pane">
+        <div id="field2" class="field row0 col1"></div>
+        <div id="field3" class="field row1 col1"></div>
+        <div class="dice-panel right" style="display: none">
+          <div id="dice-right" class="dice right"></div>
+        </div>
+      </div>
+    </div>
+    <div id="frame-bottom" class="frame"></div>
+    <div class="action-panel">
+      <button id="btn-roll" class="btn btn-primary btn-lg action" style="display: none" title="Roll dice"><i class="mdi mdi-dice-multiple"></i></button>
+      <button id="btn-confirm" class="btn btn-primary btn-lg action" style="display: none" title="Confirm moves made"><i class="mdi mdi-check"></i></button>
+      <button id="btn-undo" class="btn btn-default btn-lg action" style="display: none" title="Undo moves made"><i class="mdi mdi-undo"></i></button>
+      <div id="dice" style="display: none"></div>
+    </div>
+  </script>
+  
+  <script type="text/x-mustache" id="tmpl-rule-selector-item">
+    <label class="btn btn-default btn-lg active">
+      <input type="radio" name="rule-selected" value="name" autocomplete="off" checked> title
+    </label>
+  </script>
+
+</head>
+<body>
+  <!-- Game board -->
+  <table id="game-view" width="100%" height="100%" style="display: none">
+  <tr style="background-color:#38200a;vertical-align: top;color:#fff">
+    <td style="text-align:center" id="match-state" width="50%">Not in a match</span>
+    </td>
+  </tr>
+  <tr style="background-color:#38200a;vertical-align: top;color:#fff">
+    <td style="text-align:center;">
+          <button id="oponentTurn" class="boardButton panel-user" title="" style="padding:10px;">
+             <div id="oponentPiece">
+                <div class="thumb" id="oAvatar"></div>
+            </div>
+          </button>
+        <button id="menu-undo" type="button" class="boardButton" title="اصلاح حرکت">
+          <i class="mdi mdi-undo"></i>
+        </button>
+          <button id="menu-resignMatch" type="button" class="boardButton" title="انصراف از این بازی">
+            <i class="mdi mdi-flag-checkered"></i>
+          </button>
+            <button id="menu-resignGame" type="button" class="boardButton" title="انصراف از این دست">
+            <i class="mdi mdi-flag-outline"></i>
+          </button>
+          
+            <button id="playerTurn" class="boardButton panel-user" title="" style="padding:10px;">
+              
+                <div id="playerPiece">
+                  <div class="thumb" id="pAvatar"></div>
+                </div>
+              
+            </button>
+          
+    </td>
+  </tr>
+  <tr style="background-color:#38200a;vertical-align: top;color:#fff">
+    <td style="text-align:center;direction:ltr"><i class="mdi mdi-camera-timer"></i> <span id="playerTimeBank">0</span> - <i class="mdi mdi-timer"></i> <span id="playerTimeLeft">0</span> - <i id="playerConnectionStatus" style="color:#0f0" class="mdi mdi-record"></i> <span id="boardPlayerName"></span> (<span id="yourscore"></span>) <span style="font-weight:bold;font-size:20px;margin:10px;">VS</span> (<span id="oppscore"></span>) <span id="boardOpponentName"></span> <i id="oponentConnectionStatus" style="color:#0f0" class="mdi mdi-record"></i> - <i class="mdi mdi-timer"></i> <span id="oponentTimeLeft">0</span> - <i class="mdi mdi-camera-timer"></i> <span id="oponentTimeBank">0</span></td>
+  </tr>
+
+
+  <tr>
+    <td width="100%"  height="100%">
+      <div id="backgammon"></div>
+    </td>
+  </tr>
+  <tr id="bearPiece" style="background-color:#38200a;vertical-align: top;color:#fff">
+    <td >
+      <div id="oponnentBear"  style="float:right"  class="bearSection"></div>
+      <div id="playerBear" style="float:left" class="bearSection"></div>
+      
+    </td>
+  </tr>
+  </table>
+  
+  <div id="game-result-overlay" class="game-result overlay" style="display: none">
+    <div class="text message" style="text-align: center;font-size:30px;">Message</div>
+    <div class="text score"  style="text-align: center;font-size:20px;"><span class="state">State</span><br><strong><span class="yourscore">0</span>&nbsp;:&nbsp;<span class="oppscore">0</span></strong></div>
+  </div>
+  
+  <div id="waiting-overlay" class="waiting overlay" style="display: none">
+    <div class="loader"><div class="inner"><span>لطفا منتظر بمانید تا بازیکن دیگری به شما ملحق شود</span><br><img src="/public/images/loader.gif"><br>
+        <br>
+        <div class="challenge" style="display: none">
+          <div class="input-group input-group-lg">
+            <span class="input-group-btn" style="margin:0 auto;">
+              <button  class="btn btn-default btn-copy" type="button" id="CancelMatch">انصراف</button>
+            </span>
+          </div>
+        </div>
+    </div></div>
+  </div>
+
+<header>
+
+    <!--Header-->
+    <section class="container-fluid bg-header" id="headerSection">
+        <div class="header">
+            <div class="right">
+                <a href="#"><img src="/public/images/logo.png" alt=""></a>
+            </div>
+            <div class="center" id="account">
+                <div class="panel-user">
+                    <div class="item" style="width: 180px">
+                        <div class="username">
+                            <div class="box-thumb" style="background-image: url('/public/images/bg-user.png')">
+                                <div class="thumb" id="playerAvatar"></div>
+                            </div>
+                            <p id="playerUsername"></p>
+                        </div>
+                    </div>
+                    <div class="item" style="width: 125px">
+                        <div class="credit">
+                            <div class="box-thumb">
+                                <div class="thumb" style="background-image: url('/public/images/icon/credit.png')"></div>
+                            </div>
+                            <p id="balance"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="left">
+                    <a class="btn btn-danger" href="/logout"><i class="d-inline-flex align-middle ml-2 mdi mdi-logout"></i>خروج</a>
+                    <div class="toggle-account mobileMenuBtn" onclick="$('.main-menu').toggleClass('active');"><i class="d-inline-flex align-middle mdi mdi-menu"></i></div>
+                    <div class="toggle-account" onclick="$('#account').addClass('active'); setTimeout(function() { $('#account').removeClass('active'); }, 3500);"><i class="d-inline-flex align-middle mdi mdi-account-convert"></i></div>
+                    <div class="toggle-account" onclick="window.location.href='/logout'"><i class="d-inline-flex align-middle mdi mdi-logout"></i></div>
+            </div>
+        </div>
+    </section>
+    <!--End Header-->
+
+</header>
+<main class="main-content">
+        <div class="container-fluid">
+            <section class="row mainviewContainer">
+
+                <!--Section Main Content-->
+                <div class="col-lg-12 col-md-12 p-0 position-relative">
+
+                    <!--Main Page-->
+                    <div class="main-page">
+
+                        <!--Main Body-->
+                        <div class="main-body">
+
+                           <!--Main Menu Right-->
+                            <div class="main-menu">
+                                <div class="body">
+                                  <div style="text-align:center;margin:20px;">
+                                    <a class="buttonType1" href="" data-toggle="modal" data-target="#CreateTableModal">ایجاد میز جدید <i style="font-size:30px;" class="d-inline-flex align-middle mdi mdi-dice-multiple"></i></a>
+                                  </div>
+                                  
+                                  <div class="currentMatchCount">تعداد بازی های در حال اجرا : <span id="currentMatchCount"></span></div>
+                                  <div class="currentMatchCount">تعداد کاربران آنلاین : <span id="onlinePlayerCount"></span></div>
+                                  <div class="currentMatchCount">تعداد کل میز های منتظر : <span id="totalWaitingMatchCount"></span></div>
+                                    <div class="menu">
+                                        <ul id="leagueSelect">
+                                           {{#each viewModel.tablesInfo}}
+                                            <li>
+                                                <a style="cursor:pointer" leagueName="{{ league }}"><i class="d-inline-flex align-middle ml-2 mdi mdi-dice-6"></i>لیگ {{ league }}<span>0</span></a>
+                                            </li>
+                                          {{/each}}
+                                            
+                                            
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--End Main Menu Right-->
+
+                            <!--Content Game-->
+                            <div class="content" id="mask" style="background-color: #bbb;">
+                                <div class="header">
+                                    <div class="right">
+                                        <p><i class="d-inline-flex align-middle ml-1 mdi mdi-cube-outline"></i>نوع بازی</p>&nbsp
+                                        <select class="form-control" id="ruleFilter">
+                                          <option value="all">همه</option>
+                                          <option value="RuleBgCasual">معمولی</option>
+                                          <option value="RuleBgGulbara">گل بهار</option>
+                                          <option value="RuleBgTapa">تا‍‍‍‍پا</option>
+                                        </select>
+                                        
+                                    </div>
+                                    <div class="left">
+                                        <i class="d-inline-flex align-middle pr-1 mdi mdi-view-grid border-left active" id="view-grid" onclick="toggle_view_grid();"></i>
+                                        <i class="d-inline-flex align-middle mdi mdi-view-list" id="view-list" onclick="toggle_view_list();"></i>
+                                    </div>
+                                </div>
+                                <div class="body p-1 view-grid" id="view-item" style="background-color:#bbb">
+
+                                </div>
+                            <!--End Content Game-->
+
+                        </div>
+                        <!--End Main Body-->
+
+                    </div>
+                    <!--End Main Page-->
+
+                </div>
+                <!--End Section Main Content-->
+
+               
+
+            </section>
+
+        </div>
+    
+</main>
+
+ <div class="modal fade massage-modal" id="CreateTableModal" tabindex="-1" role="dialog" aria-labelledby="MassageModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="MassageModalLabel"><i class="d-inline-flex align-middle ml-1 mdi mdi-dice-multiple"></i></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                      
+                       <div class="form-group">
+                         <div style="text-align: right;">نوع بازی</div>
+                          <select class="form-control" id="cm-ruleFilter">
+                            <option value="RuleBgCasual">معمولی</option>
+                            <option value="RuleBgGulbara">گل بهار</option>
+                            <option value="RuleBgTapa">تا‍‍‍‍پا</option>
+                          </select>
+                        </div>
+                        <div style="text-align: right;">مبلغ</div>
+                        <div class="form-group">
+                          <select class="form-control" id="cm-matchPrice">
+                          </select>
+                        </div>
+                        <div style="text-align: right;">تعداد دست</div>
+                        <div class="form-group">
+                          <select class="form-control" id="cm-matchCount">
+                          </select>
+                        </div>
+                        <div class="form-group">
+                          <button id="btn-challenge-friend" class="btn formBtn btn-auth btn-block">ایجاد</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script type="text/javascript" src="../public/js/bundle.js"></script>
+<script type="text/javascript" src="../public/js/popper.js"></script>
+<script type="text/javascript" src="../public/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../public/js/sweetalert2.min.js"></script>
+
+<script type="text/javascript" src="../public/js/script.js"></script>
+<script type="text/javascript">
+var jsonstringTables="{{viewModel.tablesInfoJsonString}}";
+  var tablesInfo=JSON.parse(jsonstringTables.replace(/&quot;/g,"\""));
+  $(document).ready(function(){
+             if (($(".mainviewContainer").height() + $("#headerSection").height()) < window.innerHeight) {
+                $(".mainviewContainer").height(window.innerHeight - $("#headerSection").height());
+            }
+  });
+</script>
+</body>
+</html>

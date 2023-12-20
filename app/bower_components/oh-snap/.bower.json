@@ -1,0 +1,32 @@
+{
+  "name": "oh-snap",
+  "main": "ohsnap.js",
+  "homepage": "https://github.com/quasoft/ohSnap/tree/modularized",
+  "authors": [
+    "justindomingue <justin.domingue@hotmail.com>"
+  ],
+  "description": "A simple jQuery/Zepto notification library designed to be used in mobile apps",
+  "keywords": [
+    "notification",
+    "mobile",
+    "jquery",
+    "zepto"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "_release": "4d1d7fb36a",
+  "_resolution": {
+    "type": "branch",
+    "branch": "modularized",
+    "commit": "4d1d7fb36ae569696a821acc1e4875f7f83be2f8"
+  },
+  "_source": "https://github.com/quasoft/ohSnap.git",
+  "_target": "modularized",
+  "_originalSource": "https://github.com/quasoft/ohSnap.git"
+}

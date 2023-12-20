@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="fa_IR" dir="rtl">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" type="image/x-icon" href="public/images/favicon.png">
+    <title>شیش و بش</title>
+
+    <!-- All CSS -->
+    <link rel="stylesheet" href="public/css/bootstrap.css">
+    <link rel="stylesheet" href="public/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="public/css/style.css">
+    
+</head>
+<body class="body-home">
+<header>
+
+</header>
+<main class="main-content">
+    <div class="container-fluid">
+        <div class="container p-0">
+            <section class="row">
+
+
+            </section>
+
+        </div>
+    </div>
+</main>
+<!-- Modal Login -->
+<div class="modal fade auth-modal" id="LoginModal" tabindex="-1" role="dialog" aria-labelledby="LoginModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="LoginModalLabel">ورود به سیستم</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body p-md-4">
+                <form action="/Login" method="POST">
+                    <div class="form-group">
+                        <i class="mdi mdi-account"></i>
+                        <input type="text" name="username" class="form-control" placeholder="نام کاربری">
+                    </div>
+                    <div class="form-group">
+                        <i class="mdi mdi-key"></i>
+                        <input type="password"  name="password" class="form-control" placeholder="رمز ورود">
+                    </div>
+                    <button type="submit" class="btn btn-auth btn-block">ورود</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script type="text/javascript" src="public/js/jquery.min.js"></script>
+<script type="text/javascript" src="public/js/popper.js"></script>
+<script type="text/javascript" src="public/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="public/js/script.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#LoginModal").modal("show"); 
+    });
+</script>
+
+</body>
+</html>
